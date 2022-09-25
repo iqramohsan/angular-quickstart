@@ -1,0 +1,84 @@
+<div class="container">
+<div class="row">
+
+    <div class="col">
+
+        <p class="h3 fw-bold text-primary">Add Contact</p>
+            <p class="fst italic">  Google Fonts is a library of 1,451 open source font families and APIs for con venient use via CSS and Android. The library also has delightful and beautifully crafted icons for common actions and items. Download them for use in your digital products for Android, iOS, and web.
+
+        </p>
+    </div>
+</div>
+
+</div>
+
+
+<!--condition base loading -->
+
+<div *ngIf="loading">
+    <app-spiner></app-spiner>
+    </div>
+    
+    <!--display error message-->
+    <div *ngIf="!loading && errorMessage">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+    <p class="h4 text-danger fw-bold">
+    {{errorMessage}}
+    </p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+    <pre>{{contact |json}}</pre>
+
+<!--
+    <pre>{{groups | json}}</pre>
+    <pre>{{contact |json}}</pre>
+
+    contact forum
+-->
+    <div class="container">
+<div class="row">
+
+    <div class="col-sm-4">
+<form (submit)="addSubmit()">
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.name"  name="name"  class="form-control" placeholder="Name"></div>
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.photo"  name="photo" class="form-control" placeholder="photourl"></div>
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.email"  name="email" class="form-control" placeholder="Email Id"></div>
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.mobile"  name="mobile" class="form-control" placeholder="MobileNumber"></div>
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.company"  name="company" class="form-control" placeholder="company" required></div>
+        <div class="mb-2"> <input type="text" [(ngModel)]="contact.title"  name="title" class="form-control" placeholder="title" ></div>
+
+
+        <div class="mb-2">  
+            <select [(ngModel)]="contact.groupId" name="dataId" class="form-control" *ngIf="groups.length >0">
+            
+            <option value="Create">Select a Group</option>
+            <option  [value]="group.id" *ngFor="let group of groups">{{group.name}}</option> 
+        
+        </select> </div>
+
+            <div class="mb-2"> <input type="submit" class="btn btn-success"  value="Create"> 
+            
+                <a routerLink="/" class="btn btn-warning ms-2" >Close</a>
+
+            
+            </div>
+
+
+</form>
+
+    </div>
+
+    <div class="col-sm-4">
+        <img [src]="contact.photo"
+                                alt="" class="contact-img">
+    </div>
+</div>
+
+    </div>  

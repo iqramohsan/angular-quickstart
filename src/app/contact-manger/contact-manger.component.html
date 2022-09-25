@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <p class="h3">Ansari Real Estate
+                <a class="btn btn-success btn-sm" href="/contacts/add"><i class="fa fa-plus-circle"></i>add new</a>
+            </p>
+            <p class="h3">
+                <a class="btn btn-success btn-sm" href="/contacts/signup"><i class="fa fa-plus-circle"></i>signup</a>
+            </p>
+            <p class="fst-italic mt-1">
+                Google Fonts is a library of 1,451 open source font families and APIs for con
+                venient use via CSS and Android. The library also has delightful and beautifully crafted
+                icons for common actions and items. Download them for use in your digital products for Android, iOS, and
+                web.
+            </p>
+            <form>
+                <div class="row">
+                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="search contact"> </div>
+                    <div class="col-md-6"> <input type="submit" class="btn btn-outline-dark" value="search"> </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--condition base loading -->
+
+<div *ngIf="loading">
+<app-spiner></app-spiner>
+</div>
+
+<!--display error message-->
+<div *ngIf="!loading && errorMessage">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+<p class="h4 text-danger fw-bold">
+{{errorMessage}}
+</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!--<pre>{{contact | json}}</pre>
+ -->
+
+<!--card design -->
+<div class="container mt-4" *ngIf="!loading && contact.length >0">
+
+    <div class="row">
+        <div class="col-md-6" *ngFor="let contacts of contact">
+            <div class="card list-group-item-success shadow-lg my-2">
+                <div class="card-body ">
+                    <div class="row align-ite-center ">
+                        <div class="col-sm-4"> <img [src]="contacts.photo" alt="" class="contact-img"></div>
+                        <div class="col-sm-7">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name:
+                                    <span class="fw-bold">{{contacts.name}}</span>
+                                </li>
+
+                                <li class="list-group-item">Email:
+                                    <span class="fw-bold">{{contacts.email}}</span>
+                                </li>
+
+                                <li class="list-group-item">Mobile:
+                                    <span class="fw-bold">{{contacts.mobile}}</span>
+                                </li>
+                                <li class="list-group-item">Mobile:
+                                    <span class="fw-bold">{{contacts.id}}</span>
+                                </li>
+
+                               
+
+
+                            </ul>
+                        </div>
+                        <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
+                            <a routerLink="/contacts/view/{{contacts.id}}" class="btn btn-warning"><i
+                                    class="fa fa-eye"></i></a>
+                            <a routerLink="/contacts/edit/{{contacts.id}}" class="btn btn-success"><i
+                                    class="fa fa-pen"></i></a>
+                            <button class="btn btn-danger"  (click)="deletrec(contacts.id)"><i class="fa fa-trash"></i></button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
